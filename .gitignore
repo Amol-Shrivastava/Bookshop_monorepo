@@ -1,0 +1,66 @@
+# CAP bookshop
+_out
+*.db
+*.sqlite
+connection.properties
+default-*.json
+.cdsrc-private.json
+gen/
+node_modules/
+target/
+
+# Web IDE, App Studio
+.che/
+.gen/
+
+# MTA
+*_mta_build_tmp
+*.mtar
+mta_archives/
+
+# Other
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+# .vscode
+# .idea
+
+# @cap-js/cds-typer
+@cds-models
+
+# Node dependencies
+node_modules/
+.pnpm-store/
+
+# PNPM workspace state
+.pnpm-workspace-state-v1.json
+
+# Env files
+.env
+*.env
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Build output
+dist/
+build/
+coverage/
+
+# VSCode
+.vscode/
+.idea/
+
+# SAP CAP compiled artifacts
+gen/
+.db/
