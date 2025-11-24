@@ -1,0 +1,33 @@
+POST http://localhost:4004/odata/v4/catalog/submitOrder
+Content-Type:  application/json
+
+{
+    "book_ID": 201,
+    "quantity": 10
+}
+
+####
+
+POST http://localhost:4004/admin/Authors
+Content-Type: application/json
+
+{
+    "name": "Chanakya",
+    "dob": "1818-07-30",
+    "dod": "1818-07-30",
+    "placeOfBirth": "Magadh",
+    "placeOfDeath": "Magadh"
+}
+
+###
+POST http://localhost:4004/admin/Books
+Content-Type: application/json
+
+{
+    "title": "cde",
+    "descr": "cde",
+    "author_ID": "174"
+}
+
+###
+GET http://localhost:4004/admin/Authors?$expand=books
