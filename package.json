@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.23.0",
+  "private": "true",
   "dependencies": {
     "@sap/cds": "^9.4.4",
     "@sap/cds-dk": "^9.4.3"
