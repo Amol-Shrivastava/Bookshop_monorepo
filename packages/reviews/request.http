@@ -1,0 +1,28 @@
+@reviews_service_url=http://localhost:4005/reviews
+
+POST {{reviews_service_url}}/like
+Content-Type: application/json
+
+{
+    "targetReview": {
+        "subject": "Wuthering Heights",
+        "reviewer": "Amol"
+    }
+}
+
+###
+GET {{reviews_service_url}}/Likes?$filter=reviews/subject eq 'Wuthering Heights' and reviews/reviewer eq 'Amol'&$expand=reviews
+
+###
+GET {{reviews_service_url}}/Reviews?$filter=subject eq 'Wuthering Height'&$expand=likes
+
+###
+POST {{reviews_service_url}}/unlike
+Content-Type: application/json
+
+{
+    "targetReview": {
+        "subject": "Wuthering Heights",
+        "reviewer": "Amol"
+    }
+}
