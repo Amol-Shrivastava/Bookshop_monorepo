@@ -1,0 +1,16 @@
+@OrderService = http://localhost:4006/order-service
+
+GET {{OrderService}}/Orders?$expand=Items
+
+###
+
+PATCH {{OrderService}}/Orders(7e2f2640-6866-4dcf-8f4d-3027aa831cad)
+Content-Type: application/json
+
+{
+    "ID": "7e2f2640-6866-4dcf-8f4d-3027aa831cad",
+    "Items": [{
+        "quantity": 10,"product_ID": "201"
+    }]
+}
+
