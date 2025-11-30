@@ -16,5 +16,9 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "@sap/cds-dk": "^9",
+    "yaml": "^1.10.2"
+  }
 }

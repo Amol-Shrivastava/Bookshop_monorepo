@@ -1,3 +1,3 @@
 namespace sap.capire.bookstore;
 
-using from './srv/mashup'
+using from './srv/mashup';
