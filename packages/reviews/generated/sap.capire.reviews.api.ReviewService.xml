@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml">
+    <edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+    <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+    <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+  </edmx:Reference>
+  <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Validation.V1.xml">
+    <edmx:Include Alias="Validation" Namespace="Org.OData.Validation.V1"/>
+  </edmx:Reference>
+  <edmx:DataServices>
+    <Schema Namespace="sap.capire.reviews.api.ReviewService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <Annotation Term="Core.Links">
+        <Collection>
+          <Record>
+            <PropertyValue Property="rel" String="author"/>
+            <PropertyValue Property="href" String="https://cap.cloud.sap"/>
+          </Record>
+        </Collection>
+      </Annotation>
+      <EntityContainer Name="EntityContainer">
+        <EntitySet Name="AverageRatings" EntityType="sap.capire.reviews.api.ReviewService.AverageRatings"/>
+        <ActionImport Name="rate" Action="sap.capire.reviews.api.ReviewService.rate"/>
+      </EntityContainer>
+      <EntityType Name="AverageRatings">
+        <Key>
+          <PropertyRef Name="subject"/>
+        </Key>
+        <Property Name="subject" Type="Edm.String" MaxLength="111" Nullable="false"/>
+        <Property Name="rating" Type="Edm.Int32"/>
+        <Property Name="reviews" Type="Edm.Int32"/>
+      </EntityType>
+      <Action Name="rate" IsBound="false">
+        <Parameter Name="reviewer" Type="Edm.String" MaxLength="255" Nullable="false"/>
+        <Parameter Name="subject" Type="Edm.String" MaxLength="111" Nullable="false"/>
+        <Parameter Name="rating" Type="Edm.Int32" Nullable="false"/>
+        <Parameter Name="title" Type="Edm.String" MaxLength="111"/>
+        <Parameter Name="text" Type="Edm.String" MaxLength="1111"/>
+      </Action>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.EntityContainer/AverageRatings">
+        <Annotation Term="Capabilities.DeleteRestrictions">
+          <Record Type="Capabilities.DeleteRestrictionsType">
+            <PropertyValue Property="Deletable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.InsertRestrictions">
+          <Record Type="Capabilities.InsertRestrictionsType">
+            <PropertyValue Property="Insertable" Bool="false"/>
+          </Record>
+        </Annotation>
+        <Annotation Term="Capabilities.UpdateRestrictions">
+          <Record Type="Capabilities.UpdateRestrictionsType">
+            <PropertyValue Property="Updatable" Bool="false"/>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.AverageRatings/rating">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Best"/>
+              <PropertyValue Property="Value" Int="5"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Good"/>
+              <PropertyValue Property="Value" Int="4"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Avg"/>
+              <PropertyValue Property="Value" Int="3"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Poor"/>
+              <PropertyValue Property="Value" Int="2"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Worst"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.AverageRatings/reviews">
+        <Annotation Term="Core.Computed" Bool="true"/>
+      </Annotations>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.rate()/reviewer">
+        <Annotation Term="Core.Computed" Bool="true"/>
+        <Annotation Term="Core.Description" String="{i18n>UserID.Description}"/>
+        <Annotation Term="Common.Label" String="{i18n>UserID}"/>
+      </Annotations>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.rate()/rating">
+        <Annotation Term="Validation.AllowedValues">
+          <Collection>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Best"/>
+              <PropertyValue Property="Value" Int="5"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Good"/>
+              <PropertyValue Property="Value" Int="4"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Avg"/>
+              <PropertyValue Property="Value" Int="3"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Poor"/>
+              <PropertyValue Property="Value" Int="2"/>
+            </Record>
+            <Record Type="Validation.AllowedValue">
+              <Annotation Term="Core.SymbolicName" String="Worst"/>
+              <PropertyValue Property="Value" Int="1"/>
+            </Record>
+          </Collection>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.rate()/title">
+        <Annotation Term="Core.OptionalParameter">
+          <Record Type="Core.OptionalParameterType">
+            <PropertyValue Property="DefaultValue">
+              <Null/>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+      <Annotations Target="sap.capire.reviews.api.ReviewService.rate()/text">
+        <Annotation Term="Core.OptionalParameter">
+          <Record Type="Core.OptionalParameterType">
+            <PropertyValue Property="DefaultValue">
+              <Null/>
+            </PropertyValue>
+          </Record>
+        </Annotation>
+      </Annotations>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

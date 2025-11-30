@@ -8,7 +8,10 @@
   "dependencies": {
     "@sap/cds": "^8",
     "express": "^4",
-    "bookshop": "file:../bookshop"
+    "bookshop": "file:../bookshop",
+    "reviews": "*",
+    "orders": "*",
+    "common-db": "*"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
@@ -17,5 +20,13 @@
   "scripts": {
     "start": "cds-serve",
     "watch": "cds watch"
+  },
+  "cds": {
+    "requires": {
+      "Use._title_._..._.on.your.CDS.service.to.provide.a.meaningful.title.": {
+        "kind": "rest",
+        "model": "srv/external/sap.capire.reviews.api.ReviewService"
+      }
+    }
   }
 }
