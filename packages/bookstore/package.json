@@ -11,7 +11,10 @@
     "bookshop": "file:../bookshop",
     "reviews": "*",
     "orders": "*",
-    "common-db": "*"
+    "common-db": "*",
+    "@sap-cloud-sdk/connectivity": "^4",
+    "@sap-cloud-sdk/http-client": "^4",
+    "@sap-cloud-sdk/resilience": "^4"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
@@ -23,8 +26,8 @@
   },
   "cds": {
     "requires": {
-      "Use._title_._..._.on.your.CDS.service.to.provide.a.meaningful.title.": {
-        "kind": "rest",
+      "ReviewService": {
+        "kind": "odata",
         "model": "srv/external/sap.capire.reviews.api.ReviewService"
       }
     }

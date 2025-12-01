@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "creator": "cds-dk 9.4.3"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "sap_capire_reviews_api_ReviewService.rate": {
+      "kind": "action",
+      "@cds.external": true,
+      "params": {
+        "reviewer": {
+          "type": "cds.String",
+          "length": 255,
+          "notNull": true,
+          "@Core.Computed": true,
+          "doc": "{i18n>UserID.Description}",
+          "@Common.Label": "{i18n>UserID}"
+        },
+        "subject": {
+          "type": "cds.String",
+          "length": 111,
+          "notNull": true
+        },
+        "rating": {
+          "type": "cds.Integer",
+          "notNull": true,
+          "@Validation.AllowedValues": [
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Best",
+              "Value": 5
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Good",
+              "Value": 4
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Avg",
+              "Value": 3
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Poor",
+              "Value": 2
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Worst",
+              "Value": 1
+            }
+          ]
+        },
+        "title": {
+          "type": "cds.String",
+          "length": 111,
+          "default": {
+            "val": null
+          }
+        },
+        "text": {
+          "type": "cds.String",
+          "length": 1111,
+          "default": {
+            "val": null
+          }
+        }
+      }
+    },
+    "sap_capire_reviews_api_ReviewService.AverageRatings": {
+      "kind": "entity",
+      "@cds.external": true,
+      "@cds.persistence.skip": true,
+      "elements": {
+        "subject": {
+          "key": true,
+          "type": "cds.String",
+          "length": 111,
+          "notNull": true
+        },
+        "rating": {
+          "type": "cds.Integer",
+          "@Core.Computed": true,
+          "@Validation.AllowedValues": [
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Best",
+              "Value": 5
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Good",
+              "Value": 4
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Avg",
+              "Value": 3
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Poor",
+              "Value": 2
+            },
+            {
+              "$Type": "Validation.AllowedValue",
+              "@Core.SymbolicName": "Worst",
+              "Value": 1
+            }
+          ]
+        },
+        "reviews": {
+          "type": "cds.Integer",
+          "@Core.Computed": true
+        }
+      },
+      "@Capabilities.DeleteRestrictions.Deletable": false,
+      "@Capabilities.InsertRestrictions.Insertable": false,
+      "@Capabilities.UpdateRestrictions.Updatable": false
+    },
+    "sap_capire_reviews_api_ReviewService": {
+      "kind": "service",
+      "@cds.external": true
+    }
+  }
+}
