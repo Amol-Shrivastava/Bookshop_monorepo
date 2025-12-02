@@ -1,0 +1,10 @@
+@bookstore=http://localhost:4007
+
+@bookshop=http://localhost:4004
+
+
+GET {{bookshop}}/odata/v4/catalog/Books
+
+###
+
+GET {{bookstore}}/bookstore/catalog/bookstoreBooks

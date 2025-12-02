@@ -8,7 +8,7 @@
   "dependencies": {
     "@sap/cds": "^8",
     "express": "^4",
-    "bookshop": "file:../bookshop",
+    "bookshop": "*",
     "reviews": "*",
     "orders": "*",
     "common-db": "*",
@@ -28,7 +28,8 @@
     "requires": {
       "ReviewService": {
         "kind": "odata",
-        "model": "srv/external/sap.capire.reviews.api.ReviewService"
+        "model": "reviews",
+        "service": "sap.capire.reviews.api.ReviewService"
       }
     }
   }

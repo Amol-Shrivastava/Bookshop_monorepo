@@ -3,25 +3,40 @@ const cds = require("@sap/cds");
 class BookstoreCatalogService extends cds.ApplicationService {
   async init() {
     const CatalogService = await cds.connect.to("CatalogService");
-    // const ReviewServiceAPI = await cds.connect.to("ReviewServiceAPI");
+    const ReviewService = await cds.connect.to("ReviewService");
 
-    // this.on("READ", "Books", async (req) => {
-    //   return CatalogService.read(req.query);
-    // });
+    const { bookstoreBooks } = this.entities;
 
-    CatalogService.prepend((srv) =>
-      srv.on("READ", "Books/reviews", (req) => {
-        console.debug("> delegating request to ReviewServiceAPI");
-        const { id } = req.params,
-          { columns, limit } = req.query.SELECT;
-        return ReviewService.read("Reviews", columns)
-          .limit(limit)
-          .where({ subject: String(id) });
-      })
-    );
+    this.after("READ", bookstoreBooks, async (data) => {
+      await Promise.all(
+        data.map(async (book) => {
+          const results = await ReviewService.read("AverageRatings")
+            .columns("subject", "rating")
+            .where({ subject: String(book.ID) });
+
+          book.ratings = results?.[0]?.rating ?? "NA";
+        })
+      );
+    });
 
     return super.init();
   }
 }
 
 module.exports = BookstoreCatalogService;
+
+// cds.once("served", async () => {
+//   const CatalogService = await cds.connect.to("CatalogService");
+//   const ReviewService = await cds.connect.to("ReviewService");
+
+//   CatalogService.prepend((srv) =>
+//     srv.on("READ", "Books/reviews", (req) => {
+//       debugger;
+//       const [id] = req.params,
+//         { columns, limit } = req.query.SELECT;
+//       return ReviewService.read("Reviews", columns)
+//         .limit(limit)
+//         .where({ subject: String(id) });
+//     })
+//   );
+// });
