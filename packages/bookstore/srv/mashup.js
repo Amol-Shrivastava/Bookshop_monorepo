@@ -57,7 +57,7 @@ const cds = require("@sap/cds");
 cds.once("served", async () => {
   const CatalogService = await cds.connect.to("CatalogService");
   const ReviewService = await cds.connect.to("ReviewService");
-
+  const OrderService = await cds.connect.to("OrderService");
 
   CatalogService.prepend((srv) =>
     srv.on("READ", "Books/reviews", (req) => {
@@ -69,4 +69,44 @@ cds.once("served", async () => {
         .where({ subject: String(id) });
     })
   );
+
+  CatalogService.before("submitOrder", async (req) => {
+    const { book_ID, quantity, buyer = req.user.id || "C5383659" } = req.data;
+
+    const { title, price } = await db
+      .read("Books")
+      .columns("title", "price")
+      .where({ ID: book_ID });
+
+    await OrderService.create("OrderNoDraft").entries({
+      OrderNo: `Order at ${new Date().toLocaleString()}`,
+      Items: [
+        {
+          product: {
+            ID: `${book_ID}`,
+            quantity,
+            title,
+            price,
+          },
+        },
+      ],
+      buyer,
+      createdBy: buyer,
+    });
+  });
+
+  ReviewService.on("AverageRatings.Changed", (msg) => {
+    console.debug("> recieved: ", msg.event, msg.data);
+    const { subject, rating, reviews } = msg.data;
+    return UPDATE("Books", subject).with({ reviews, rating });
+  });
+
+  OrderService.on("OrderChanged", (msg) => {
+    console.debug("> recieved: ", msg.event, msg.data);
+    const { product, deltaQty } = msg.data;
+    return UPDATE("Books")
+      .where("ID= ", product)
+      .and("stock >= ", deltaQty)
+      .set("stock -= ", deltaQty);
+  });
 });
