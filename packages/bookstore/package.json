@@ -30,6 +30,11 @@
         "kind": "odata",
         "model": "reviews",
         "service": "sap.capire.reviews.api.ReviewService"
+      },
+      "OrderService": {
+        "kind": "odata",
+        "model": "orders",
+        "service": "sap.capire.orders.api.OrderService"
       }
     }
   }

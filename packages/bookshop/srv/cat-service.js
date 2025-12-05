@@ -10,7 +10,7 @@ class CatalogService extends cds.ApplicationService {
 
     this.on("submitOrder", async (req) => {
       const { book_ID, quantity } = req.data;
-
+      console.debug("> submit order action called");
       if (!book_ID || !quantity || quantity < 1)
         return req.error(
           400,
