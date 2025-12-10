@@ -1,8 +1,7 @@
 using {sap.capire.bookshop as my} from '../db/schema';
 
 
-@oData: '/browse'
-service CatalogService {
+service CatalogService @(path: '/browse') {
     @readonly
     entity ListofBooks as
         projection on my.Books

@@ -12,13 +12,8 @@
     "db",
     "index.cds"
   ],
-  "dependencies": {
-    "@sap/cds": "^8.9.7",
-    "express": "^4"
-  },
-  "devDependencies": {
-    "@cap-js/sqlite": "^1"
-  },
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
     "start": "cds-serve",
     "watch": "cds watch"
